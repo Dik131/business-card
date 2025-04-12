@@ -5,7 +5,7 @@ import { motion, useInView, type MotionValue, useTransform } from "framer-motion
 
 interface TimelineCardProps {
   index: number
-  position: string
+  position: "left" | "right" | "center"
   icon: ReactNode
   title: string
   content: string
@@ -33,7 +33,7 @@ export default function TimelineCard({
   const opacity = useTransform(scrollYProgress, [start - 0.1, start, end, end + 0.1], [0, 1, 1, 0])
   const scale = useTransform(scrollYProgress, [start - 0.1, start, end, end + 0.1], [0.5, 1, 1, 0.5])
 
-  const getPositionStyles = () => {
+  const getPositionStyles = (): string => {
     switch (position) {
       case "left":
         return "md:mr-auto md:ml-12 md:pr-12"

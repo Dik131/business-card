@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion, useScroll, useTransform, type MotionValue } from "framer-motion"
 import { Book, Briefcase, Code, Github, Globe, Linkedin, Mail, Terminal, Zap } from "lucide-react"
 import Image from "next/image"
 
@@ -10,32 +10,43 @@ import TimelineCard from "./timeline-card"
 
 const CARD_COUNT = 10;
 
+type CardPosition = "left" | "right" | "center";
+
+interface TimelineCard {
+  id: number;
+  position: CardPosition;
+  icon: React.ReactNode;
+  title: string;
+  content: string;
+}
+
 export default function BusinessCardTimeline() {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
-  })
+  });
 
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
+      setIsMobile(window.innerWidth < 768);
+    };
 
-    checkMobile()
-    window.addEventListener("resize", checkMobile)
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
 
     return () => {
-      window.removeEventListener("resize", checkMobile)
-    }
-  }, [])
+      window.removeEventListener("resize", checkMobile);
+    };
+  }, []);
 
-  // Создаем массивы трансформаций
-  const dotOpacities: any[] = [];
-  const lineOpacities: any[] = [];
+  // Initialize arrays with proper types
+  const dotOpacities: MotionValue<number>[] = [];
+  const lineOpacities: MotionValue<number>[] = [];
 
+  // Populate arrays with transformations
   for (let i = 0; i < CARD_COUNT; i++) {
     dotOpacities.push(
       useTransform(
@@ -59,12 +70,12 @@ export default function BusinessCardTimeline() {
     );
   }
 
-  const cards = [
+  const cards: TimelineCard[] = [
     {
       id: 1,
       position: "center",
       icon: (
-        <div className="relative h-16 w-16 rounded-full overflow-hidden border-1 border-white">
+        <div className="relative h-16 w-16 rounded-full overflow-hidden border border-white">
           <Image 
             src="/profile.jpeg" 
             alt="Dmitrii Ivanov"
@@ -139,17 +150,20 @@ export default function BusinessCardTimeline() {
       title: "Other Contacts",
       content: "BlueSky: ivanovdk.bsky.social | Telegram: @Dik131",
     },
-  ]
+  ];
 
-  const getPosition = (position: string) => {
-    if (isMobile) return "center"
-    return position
-  }
+  const getPosition = (position: CardPosition): CardPosition => {
+    return isMobile ? "center" : position;
+  };
 
-  const getXPosition = (position: string) => {
-    if (isMobile) return "50%"
-    return position === "left" ? "30%" : position === "right" ? "70%" : "50%"
-  }
+  const getXPosition = (position: CardPosition): string => {
+    if (isMobile) return "50%";
+    switch (position) {
+      case "left": return "30%";
+      case "right": return "70%";
+      default: return "50%";
+    }
+  };
 
   return (
     <div className="relative min-h-screen w-full bg-transparent">
@@ -163,8 +177,8 @@ export default function BusinessCardTimeline() {
       >
         <div className="absolute left-0 top-0 h-full w-full">
           {cards.map((card, index) => {
-            const currentX = getXPosition(card.position)
-            const yPosition = `${(index / CARD_COUNT) * 100}%`
+            const currentX = getXPosition(card.position);
+            const yPosition = `${(index / CARD_COUNT) * 100}%`;
 
             if (!isMobile) {
               return (
@@ -186,16 +200,16 @@ export default function BusinessCardTimeline() {
                     repeatDelay: 3,
                   }}
                 />
-              )
+              );
             }
-            return null
+            return null;
           })}
 
           {cards.map((card, index) => {
-            if (index === cards.length - 1) return null
-            const currentX = getXPosition(card.position)
-            const nextCard = cards[index + 1]
-            const nextX = nextCard ? getXPosition(nextCard.position) : undefined
+            if (index === cards.length - 1) return null;
+            const currentX = getXPosition(card.position);
+            const nextCard = cards[index + 1];
+            const nextX = getXPosition(nextCard.position);
 
             return (
               <motion.div
@@ -218,7 +232,7 @@ export default function BusinessCardTimeline() {
                   />
                 </svg>
               </motion.div>
-            )
+            );
           })}
         </div>
 
@@ -237,5 +251,5 @@ export default function BusinessCardTimeline() {
         ))}
       </div>
     </div>
-  )
+  );
 }
