@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState, useMemo } from "react"
+import { useEffect, useRef, useState } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { AtSign, Book, Briefcase, Code, Github, Globe, Linkedin, Mail, Terminal, User, Zap } from "lucide-react"
 import Image from "next/image"
@@ -30,7 +30,7 @@ export default function BusinessCardTimeline() {
     }
   }, [])
 
-  const cards = useMemo(() => [
+  const cards = [
     {
       id: 1,
       position: "center",
@@ -48,28 +48,30 @@ export default function BusinessCardTimeline() {
       content: "Developer & Tech Support",
     },
     // ... остальные карточки без изменений
-  ], [])
+  ]
 
-  // Предварительно вычисляем все transform значения
-  const cardTransforms = useMemo(() => 
-    cards.map((_, index) => ({
-      dotOpacity: useTransform(
-        scrollYProgress,
-        [
-          (index - 0.5) / cards.length,
-          index / cards.length,
-          (index + 1) / cards.length,
-          (index + 1.5) / cards.length,
-        ],
-        [0, 1, 1, 0]
-      ),
-      lineOpacity: useTransform(
-        scrollYProgress,
-        [index / cards.length, (index + 1) / cards.length],
-        [0, 1]
-      )
-    }))
-  , [cards.length, scrollYProgress])
+  // Создаем массив трансформаций для точек
+  const dotOpacities = cards.map((_, index) => 
+    useTransform(
+      scrollYProgress,
+      [
+        (index - 0.5) / cards.length,
+        index / cards.length,
+        (index + 1) / cards.length,
+        (index + 1.5) / cards.length,
+      ],
+      [0, 1, 1, 0]
+    )
+  )
+
+  // Создаем массив трансформаций для линий
+  const lineOpacities = cards.map((_, index) => 
+    useTransform(
+      scrollYProgress,
+      [index / cards.length, (index + 1) / cards.length],
+      [0, 1]
+    )
+  )
 
   const getPosition = (position: string) => {
     if (isMobile) return "center"
@@ -105,7 +107,7 @@ export default function BusinessCardTimeline() {
                     left: currentX,
                     top: yPosition,
                     transform: 'translate(-50%, -50%)',
-                    opacity: cardTransforms[index]?.dotOpacity || 0,
+                    opacity: dotOpacities[index],
                   }}
                   animate={{
                     scale: [1, 1.2, 1],
@@ -134,7 +136,7 @@ export default function BusinessCardTimeline() {
                 style={{
                   top: `${(index / cards.length) * 100}%`,
                   height: `${(1 / cards.length) * 100}%`,
-                  opacity: cardTransforms[index]?.lineOpacity || 0,
+                  opacity: lineOpacities[index],
                 }}
               >
                 <svg className="h-full w-full overflow-visible">
