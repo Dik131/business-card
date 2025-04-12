@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { AtSign, Briefcase, Github, Linkedin, Mail, Phone, User, Zap } from "lucide-react"
+import { AtSign, Book, Briefcase, Code, Github, Globe, Linkedin, Mail, Phone, Terminal, User, Zap } from "lucide-react"
 
 import TVNoiseBackground from "./tv-noise-background"
 import TimelineCard from "./timeline-card"
@@ -34,60 +34,74 @@ export default function BusinessCardTimeline() {
       id: 1,
       position: "center",
       icon: <User className="h-5 w-5" />,
-      title: "John Doe",
-      content: "Creative Developer & Designer",
+      title: "Dmitrii Ivanov",
+      content: "Developer & Tech Support",
     },
     {
       id: 2,
       position: "right",
       icon: <Briefcase className="h-5 w-5" />,
-      title: "Experience",
-      content: "5+ years in web development, UI/UX design, and interactive media",
+      title: "About Me",
+      content: "32 y.o., based in Moscow, Russia (relocated from Turku, Finland). Tech Support Specialist transitioning to Next.js/React Native developer.",
     },
     {
       id: 3,
       position: "left",
       icon: <Zap className="h-5 w-5" />,
-      title: "Skills",
-      content: "React, Next.js, Three.js, Framer Motion, Tailwind CSS, TypeScript",
+      title: "Tech Stack",
+      content: "JavaScript/TypeScript, React, Next.js, Node.js, React Native, Electron, Zustand/Redux, SQLite, Git",
     },
     {
       id: 4,
       position: "center",
-      icon: <Github className="h-5 w-5" />,
-      title: "Projects",
-      content: "Interactive websites, 3D experiences, and creative coding experiments",
+      icon: <Code className="h-5 w-5" />,
+      title: "Current Focus",
+      content: "Next.js, Nest.JS, Electron.js, React Native",
     },
     {
       id: 5,
       position: "left",
-      icon: <Mail className="h-5 w-5" />,
-      title: "Contact",
-      content: "hello@johndoe.com",
+      icon: <Terminal className="h-5 w-5" />,
+      title: "Projects",
+      content: "React Native course app, Weeky task manager, Telegram bots, Docsify documentation",
     },
     {
       id: 6,
-      position: "center",
-      icon: <Phone className="h-5 w-5" />,
-      title: "Phone",
-      content: "+1 (555) 123-4567",
+      position: "right",
+      icon: <Book className="h-5 w-5" />,
+      title: "Languages",
+      content: "English (B2), Russian (native), German (A2), Finnish (A1)",
     },
     {
       id: 7,
-      position: "right",
-      icon: <Linkedin className="h-5 w-5" />,
-      title: "LinkedIn",
-      content: "linkedin.com/in/johndoe",
+      position: "center",
+      icon: <Mail className="h-5 w-5" />,
+      title: "Email",
+      content: "ivanov.dk131@gmail.com",
     },
     {
       id: 8,
+      position: "left",
+      icon: <Linkedin className="h-5 w-5" />,
+      title: "LinkedIn",
+      content: "linkedin.com/in/dmitry-ivanov-47bb4921a",
+    },
+    {
+      id: 9,
+      position: "right",
+      icon: <Github className="h-5 w-5" />,
+      title: "GitHub",
+      content: "github.com/Dik131 | github.com/IvanovDkLACCTV",
+    },
+    {
+      id: 10,
       position: "center",
-      icon: <AtSign className="h-5 w-5" />,
-      title: "Social",
-      content: "@johndoe across platforms",
+      icon: <Globe className="h-5 w-5" />,
+      title: "Other Contacts",
+      content: "BlueSky: ivanovdk.bsky.social | Telegram: @Dik131",
     },
   ]
-
+  
   const getPosition = (position: string) => {
     if (isMobile) return "center"
     return position
