@@ -3,11 +3,12 @@
 import { useEffect, useRef, useState } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { AtSign, Book, Briefcase, Code, Github, Globe, Linkedin, Mail, Phone, Terminal, User, Zap } from "lucide-react"
+import Image from "next/image"
 
 import TVNoiseBackground from "./tv-noise-background"
 import TimelineCard from "./timeline-card"
 
-export default function BusinessCardTimeline() {
+export default function BusinessCardTimeline()  {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -33,7 +34,16 @@ export default function BusinessCardTimeline() {
     {
       id: 1,
       position: "center",
-      icon: <User className="h-5 w-5" />,
+      icon: (
+        <div className="relative h-16 w-16 rounded-full overflow-hidden border-1 border-white">
+          <Image 
+            src="/profile.jpeg" 
+            alt="Dmitrii Ivanov"
+            fill
+            className="object-cover"
+          />
+        </div>
+      ),
       title: "Dmitrii Ivanov",
       content: "Developer & Tech Support",
     },
@@ -49,7 +59,7 @@ export default function BusinessCardTimeline() {
       position: "left",
       icon: <Zap className="h-5 w-5" />,
       title: "Tech Stack",
-      content: "JavaScript/TypeScript, React, Next.js, Node.js, React Native, Electron, Zustand/Redux, SQLite, Git",
+      content: "JavaScript/TypeScript, React, Next.js, Node.js (express.js and Nest.js), React Native, Electron, Zustand/Redux, SQLite, Git",
     },
     {
       id: 4,
