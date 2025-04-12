@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { AtSign, Book, Briefcase, Code, Github, Globe, Linkedin, Mail, Terminal, User, Zap } from "lucide-react"
+import { Book, Briefcase, Code, Github, Globe, Linkedin, Mail, Terminal, Zap } from "lucide-react"
 import Image from "next/image"
 
 import TVNoiseBackground from "./tv-noise-background"
@@ -33,7 +33,7 @@ export default function BusinessCardTimeline() {
   }, [])
 
   // Создаем массивы трансформаций с фиксированным размером
-  const dotOpacities = Array(CARD_COUNT).fill(0).map((_, index) => 
+  const dotOpacities = Array.from({ length: CARD_COUNT }, (_, index) => 
     useTransform(
       scrollYProgress,
       [
@@ -46,7 +46,7 @@ export default function BusinessCardTimeline() {
     )
   )
 
-  const lineOpacities = Array(CARD_COUNT).fill(0).map((_, index) => 
+  const lineOpacities = Array.from({ length: CARD_COUNT }, (_, index) => 
     useTransform(
       scrollYProgress,
       [index / CARD_COUNT, (index + 1) / CARD_COUNT],
