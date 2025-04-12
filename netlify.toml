@@ -1,10 +1,10 @@
 [build]
   command = "pnpm build"
   publish = "out"
-  environment = { 
-    NEXT_PUBLIC_ANALYTICS_ID = "false",
+  
+  [build.environment]
+    NEXT_PUBLIC_ANALYTICS_ID = "false"
     NODE_VERSION = "20"
-  }
 
 [context.production.environment]
   NODE_VERSION = "20"
