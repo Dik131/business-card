@@ -32,21 +32,21 @@ export default function BusinessCardTimeline() {
   const cards = [
     {
       id: 1,
-      position: "left",
+      position: "center",
       icon: <User className="h-5 w-5" />,
       title: "John Doe",
       content: "Creative Developer & Designer",
     },
     {
       id: 2,
-      position: "center",
+      position: "right",
       icon: <Briefcase className="h-5 w-5" />,
       title: "Experience",
       content: "5+ years in web development, UI/UX design, and interactive media",
     },
     {
       id: 3,
-      position: "right",
+      position: "left",
       icon: <Zap className="h-5 w-5" />,
       title: "Skills",
       content: "React, Next.js, Three.js, Framer Motion, Tailwind CSS, TypeScript",
