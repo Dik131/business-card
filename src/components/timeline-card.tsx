@@ -22,7 +22,7 @@ export default function TimelineCard({
   content,
   scrollYProgress,
   total,
-  isMobile,
+  isMobile: _isMobile,
 }: TimelineCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(cardRef, { once: false, amount: 0.5 })

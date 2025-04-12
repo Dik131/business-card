@@ -8,7 +8,7 @@ import Image from "next/image"
 import TVNoiseBackground from "./tv-noise-background"
 import TimelineCard from "./timeline-card"
 
-const CARD_COUNT = 10; // Фиксированное количество карточек
+const CARD_COUNT = 10;
 
 export default function BusinessCardTimeline() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -32,27 +32,32 @@ export default function BusinessCardTimeline() {
     }
   }, [])
 
-  // Создаем массивы трансформаций с фиксированным размером
-  const dotOpacities = Array.from({ length: CARD_COUNT }, (_, index) => 
-    useTransform(
-      scrollYProgress,
-      [
-        (index - 0.5) / CARD_COUNT,
-        index / CARD_COUNT,
-        (index + 1) / CARD_COUNT,
-        (index + 1.5) / CARD_COUNT,
-      ],
-      [0, 1, 1, 0]
-    )
-  )
+  // Создаем массивы трансформаций
+  const dotOpacities: any[] = [];
+  const lineOpacities: any[] = [];
 
-  const lineOpacities = Array.from({ length: CARD_COUNT }, (_, index) => 
-    useTransform(
-      scrollYProgress,
-      [index / CARD_COUNT, (index + 1) / CARD_COUNT],
-      [0, 1]
-    )
-  )
+  for (let i = 0; i < CARD_COUNT; i++) {
+    dotOpacities.push(
+      useTransform(
+        scrollYProgress,
+        [
+          (i - 0.5) / CARD_COUNT,
+          i / CARD_COUNT,
+          (i + 1) / CARD_COUNT,
+          (i + 1.5) / CARD_COUNT,
+        ],
+        [0, 1, 1, 0]
+      )
+    );
+
+    lineOpacities.push(
+      useTransform(
+        scrollYProgress,
+        [i / CARD_COUNT, (i + 1) / CARD_COUNT],
+        [0, 1]
+      )
+    );
+  }
 
   const cards = [
     {
