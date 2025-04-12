@@ -88,47 +88,92 @@ export default function BusinessCardTimeline() {
     },
   ]
 
-  // Adjust positions for mobile
   const getPosition = (position: string) => {
-    if (isMobile) {
-      return "center"
-    }
+    if (isMobile) return "center"
     return position
   }
 
+  const getXPosition = (position: string) => {
+    if (isMobile) return "50%"
+    return position === "left" ? "30%" : position === "right" ? "70%" : "50%"
+  }
+
   return (
-    <div className="relative min-h-screen w-full bg-gray-300">
-      <TVNoiseBackground />
+    <div className="relative min-h-screen w-full bg-transparent">
+      <div className="fixed inset-0 -z-10 h-full w-full">
+        <TVNoiseBackground />
+      </div>
 
       <div
         ref={containerRef}
-        className="relative mx-auto flex min-h-[200vh] w-full max-w-7xl flex-col items-center py-32"
+        className="relative mx-auto flex min-h-[200vh] w-full max-w-7xl flex-col items-center py-32 z-10"
       >
-        {/* Timeline connecting lines */}
         <div className="absolute left-0 top-0 h-full w-full">
           {cards.map((card, index) => {
+            const currentX = getXPosition(card.position)
+            const yPosition = `${(index / cards.length) * 100}%`
+            const opacity = useTransform(
+              scrollYProgress,
+              [
+                (index - 0.5) / cards.length,
+                index / cards.length,
+                (index + 1) / cards.length,
+                (index + 1.5) / cards.length,
+              ],
+              [0, 1, 1, 0]
+            )
+
+            if (!isMobile) {
+              return (
+                <motion.div
+                  key={`dot-${card.id}`}
+                  className="absolute z-20 h-4 w-4 rounded-full bg-[#FF3B30]"
+                  style={{
+                    left: currentX,
+                    top: yPosition,
+                    transform: 'translate(-50%, -50%)',
+                    opacity,
+                  }}
+                  animate={{
+                    scale: [1, 1.2, 1],
+                  }}
+                  transition={{
+                    duration: 0.5,
+                    repeat: Infinity,
+                    repeatDelay: 3,
+                  }}
+                />
+              )
+            }
+            return null
+          })}
+
+          {cards.map((card, index) => {
             if (index === cards.length - 1) return null
-
+            const currentX = getXPosition(card.position)
             const nextCard = cards[index + 1]
-            const currentPosition = isMobile ? "center" : card.position
-            const nextPosition = isMobile ? "center" : nextCard.position
-
-            const opacity = useTransform(scrollYProgress, [index / cards.length, (index + 1) / cards.length], [0, 1])
+            const nextX = nextCard ? getXPosition(nextCard.position) : undefined
+            const opacity = useTransform(
+              scrollYProgress,
+              [index / cards.length, (index + 1) / cards.length],
+              [0, 1]
+            )
 
             return (
               <motion.div
-                key={card.id}
-                className="absolute h-[calc(100%/8)] w-full"
+                key={`line-${card.id}`}
+                className="absolute w-full z-10"
                 style={{
                   top: `${(index / cards.length) * 100}%`,
-                  opacity: opacity,
+                  height: `${(1 / cards.length) * 100}%`,
+                  opacity,
                 }}
               >
-                <svg className="h-full w-full">
+                <svg className="h-full w-full overflow-visible">
                   <line
-                    x1={currentPosition === "left" ? "30%" : currentPosition === "right" ? "70%" : "50%"}
+                    x1={currentX}
                     y1="0%"
-                    x2={nextPosition === "left" ? "30%" : nextPosition === "right" ? "70%" : "50%"}
+                    x2={nextX}
                     y2="100%"
                     stroke="white"
                     strokeWidth="2"

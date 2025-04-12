@@ -27,15 +27,12 @@ export default function TimelineCard({
   const cardRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(cardRef, { once: false, amount: 0.5 })
 
-  // Calculate the progress range for this card
   const start = index / total
   const end = (index + 1) / total
 
-  // Transform the scroll progress to the card's opacity and scale
   const opacity = useTransform(scrollYProgress, [start - 0.1, start, end, end + 0.1], [0, 1, 1, 0])
   const scale = useTransform(scrollYProgress, [start - 0.1, start, end, end + 0.1], [0.5, 1, 1, 0.5])
 
-  // Position styles
   const getPositionStyles = () => {
     switch (position) {
       case "left":
@@ -47,31 +44,8 @@ export default function TimelineCard({
     }
   }
 
-  // Get dot position based on card position
-  const getDotPosition = () => {
-    switch (position) {
-      case "left":
-        return "right-0 translate-x-1/2"
-      case "right":
-        return "left-0 -translate-x-1/2"
-      default:
-        return "left-1/2 -translate-x-1/2"
-    }
-  }
-
   return (
     <div ref={cardRef} className={`relative my-24 w-full max-w-md ${getPositionStyles()}`}>
-      {/* Red dot - only show on desktop and positioned at the top of the card */}
-      {!isMobile && (
-        <motion.div
-          className={`absolute top-0 z-10 h-4 w-4 -translate-y-1/2 rounded-full bg-[#FF3B30] ${getDotPosition()}`}
-          initial={{ scale: 1 }}
-          animate={{ scale: isInView ? [1, 1.2, 1] : 1 }}
-          transition={{ duration: 0.5, repeat: isInView ? Number.POSITIVE_INFINITY : 0, repeatDelay: 3 }}
-        />
-      )}
-
-      {/* Card */}
       <motion.div
         className="relative z-0 overflow-hidden rounded-xl bg-[#2A2A2A] p-6 shadow-lg"
         style={{ opacity, scale }}

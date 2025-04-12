@@ -121,5 +121,31 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-rgb: 0, 0, 0;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+.text-silver {
+  color: #c0c0c0;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
   }
 }
