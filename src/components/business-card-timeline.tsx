@@ -8,6 +8,8 @@ import Image from "next/image"
 import TVNoiseBackground from "./tv-noise-background"
 import TimelineCard from "./timeline-card"
 
+const CARD_COUNT = 10; // Фиксированное количество карточек
+
 export default function BusinessCardTimeline() {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
@@ -30,6 +32,28 @@ export default function BusinessCardTimeline() {
     }
   }, [])
 
+  // Создаем массивы трансформаций с фиксированным размером
+  const dotOpacities = Array(CARD_COUNT).fill(0).map((_, index) => 
+    useTransform(
+      scrollYProgress,
+      [
+        (index - 0.5) / CARD_COUNT,
+        index / CARD_COUNT,
+        (index + 1) / CARD_COUNT,
+        (index + 1.5) / CARD_COUNT,
+      ],
+      [0, 1, 1, 0]
+    )
+  )
+
+  const lineOpacities = Array(CARD_COUNT).fill(0).map((_, index) => 
+    useTransform(
+      scrollYProgress,
+      [index / CARD_COUNT, (index + 1) / CARD_COUNT],
+      [0, 1]
+    )
+  )
+
   const cards = [
     {
       id: 1,
@@ -47,31 +71,70 @@ export default function BusinessCardTimeline() {
       title: "Dmitrii Ivanov",
       content: "Developer & Tech Support",
     },
-    // ... остальные карточки без изменений
+    {
+      id: 2,
+      position: "right",
+      icon: <Briefcase className="h-5 w-5" />,
+      title: "About Me",
+      content: "32 y.o., based in Moscow, Russia (relocated from Turku, Finland). Tech Support Specialist transitioning to Next.js/React Native developer.",
+    },
+    {
+      id: 3,
+      position: "left",
+      icon: <Zap className="h-5 w-5" />,
+      title: "Tech Stack",
+      content: "JavaScript/TypeScript, React, Next.js, Node.js (Express.js and Nest.js), React Native, Electron, Zustand/Redux, SQLite, Git",
+    },
+    {
+      id: 4,
+      position: "center",
+      icon: <Code className="h-5 w-5" />,
+      title: "Current Focus",
+      content: "Next.js, Nest.JS, Electron.js, React Native",
+    },
+    {
+      id: 5,
+      position: "left",
+      icon: <Terminal className="h-5 w-5" />,
+      title: "Projects",
+      content: "React Native course app, Weeky task manager, Telegram bots, Docsify documentation",
+    },
+    {
+      id: 6,
+      position: "right",
+      icon: <Book className="h-5 w-5" />,
+      title: "Languages",
+      content: "English (B2), Russian (native), German (A2), Finnish (A1)",
+    },
+    {
+      id: 7,
+      position: "center",
+      icon: <Mail className="h-5 w-5" />,
+      title: "Email",
+      content: "ivanov.dk131@gmail.com",
+    },
+    {
+      id: 8,
+      position: "left",
+      icon: <Linkedin className="h-5 w-5" />,
+      title: "LinkedIn",
+      content: "linkedin.com/in/dmitry-ivanov-47bb4921a",
+    },
+    {
+      id: 9,
+      position: "right",
+      icon: <Github className="h-5 w-5" />,
+      title: "GitHub",
+      content: "github.com/Dik131 | github.com/IvanovDkLACCTV",
+    },
+    {
+      id: 10,
+      position: "center",
+      icon: <Globe className="h-5 w-5" />,
+      title: "Other Contacts",
+      content: "BlueSky: ivanovdk.bsky.social | Telegram: @Dik131",
+    },
   ]
-
-  // Создаем массив трансформаций для точек
-  const dotOpacities = cards.map((_, index) => 
-    useTransform(
-      scrollYProgress,
-      [
-        (index - 0.5) / cards.length,
-        index / cards.length,
-        (index + 1) / cards.length,
-        (index + 1.5) / cards.length,
-      ],
-      [0, 1, 1, 0]
-    )
-  )
-
-  // Создаем массив трансформаций для линий
-  const lineOpacities = cards.map((_, index) => 
-    useTransform(
-      scrollYProgress,
-      [index / cards.length, (index + 1) / cards.length],
-      [0, 1]
-    )
-  )
 
   const getPosition = (position: string) => {
     if (isMobile) return "center"
@@ -96,7 +159,7 @@ export default function BusinessCardTimeline() {
         <div className="absolute left-0 top-0 h-full w-full">
           {cards.map((card, index) => {
             const currentX = getXPosition(card.position)
-            const yPosition = `${(index / cards.length) * 100}%`
+            const yPosition = `${(index / CARD_COUNT) * 100}%`
 
             if (!isMobile) {
               return (
@@ -134,8 +197,8 @@ export default function BusinessCardTimeline() {
                 key={`line-${card.id}`}
                 className="absolute w-full z-10"
                 style={{
-                  top: `${(index / cards.length) * 100}%`,
-                  height: `${(1 / cards.length) * 100}%`,
+                  top: `${(index / CARD_COUNT) * 100}%`,
+                  height: `${(1 / CARD_COUNT) * 100}%`,
                   opacity: lineOpacities[index],
                 }}
               >
@@ -163,7 +226,7 @@ export default function BusinessCardTimeline() {
             title={card.title}
             content={card.content}
             scrollYProgress={scrollYProgress}
-            total={cards.length}
+            total={CARD_COUNT}
             isMobile={isMobile}
           />
         ))}
