@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useTransform } from "framer-motion"
 import { MotionValue } from "framer-motion"
 
 interface TimelineLineProps {
@@ -8,17 +8,18 @@ interface TimelineLineProps {
   x2: string
   y: string
   height: string
-  opacity: MotionValue<number>
+  opacity: MotionValue<number[]>
+  index: number
 }
 
-export default function TimelineLine({ x1, x2, y, height, opacity }: TimelineLineProps) {
+export default function TimelineLine({ x1, x2, y, height, opacity, index }: TimelineLineProps) {
   return (
     <motion.div
       className="absolute w-full z-10"
       style={{
         top: y,
         height,
-        opacity,
+        opacity: useTransform(opacity, (values: number[]) => values[index]),
       }}
     >
       <svg className="h-full w-full overflow-visible">

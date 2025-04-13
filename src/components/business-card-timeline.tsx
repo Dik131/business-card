@@ -21,7 +21,7 @@ export default function BusinessCardTimeline() {
     offset: ["start start", "end end"],
   });
 
-  const { dotOpacities, lineOpacities } = useTimelineOpacities(scrollYProgress, CARD_COUNT);
+  const { allDots, allLines } = useTimelineOpacities(scrollYProgress, CARD_COUNT);
 
   return (
     <div className="relative min-h-screen w-full bg-transparent">
@@ -33,6 +33,7 @@ export default function BusinessCardTimeline() {
         ref={containerRef}
         className="relative z-10 mx-auto flex min-h-[200vh] w-full max-w-7xl flex-col items-center py-32"
       >
+        {/* Отображаем точки (dots) */}
         <div className="absolute left-0 top-0 h-full w-full">
           {!isMobile &&
             cardsData.map((card, index) => (
@@ -40,10 +41,12 @@ export default function BusinessCardTimeline() {
                 key={`dot-${card.id}`}
                 x={getXPosition(isMobile, card.position)}
                 y={`${(index / CARD_COUNT) * 100}%`}
-                opacity={dotOpacities[index]}
+                opacity={allDots}
+                index={index}
               />
             ))}
 
+          {/* Отображаем линии (lines) */}
           {cardsData.slice(0, -1).map((card, index) => (
             <TimelineLine
               key={`line-${card.id}`}
@@ -51,11 +54,13 @@ export default function BusinessCardTimeline() {
               x2={getXPosition(isMobile, cardsData[index + 1].position)}
               y={`${(index / CARD_COUNT) * 100}%`}
               height={`${(1 / CARD_COUNT) * 100}%`}
-              opacity={lineOpacities[index]}
+              opacity={allLines}
+              index={index}
             />
           ))}
         </div>
 
+        {/* Отображаем карточки (cards) */}
         {cardsData.map((card, index) => (
           <TimelineCard
             key={card.id}
