@@ -45,13 +45,28 @@ export default function TimelineCard({
   }
 
   return (
-    <div ref={cardRef} className={`relative w-full max-w-2xl ${index === 0 ? 'mt-0' : 'mt-[30vh]'} mb-[30vh] ${getPositionStyles()}`}>
+    <div ref={cardRef} className={`relative w-full max-w-2xl ${index === 0 ? 'mt-0' : 'mt-[20vh] md:mt-[30vh]'} ${index === total - 1 ? 'mb-[5vh] md:mb-[15vh]' : 'mb-[20vh] md:mb-[30vh]'} ${getPositionStyles()}`}>
       <motion.div
         className="relative z-10 overflow-hidden rounded-xl bg-[#2A2A2A] p-8 shadow-lg backdrop-blur-sm pointer-events-none"
         style={{ opacity, scale }}
         initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: isInView ? 1 : 0, scale: isInView ? 1 : 0.5 }}
-        transition={{ duration: 0.5 }}
+        animate={{
+          opacity: isInView ? 1 : 0,
+          scale: isInView ? 1 : 0.5,
+          ...(index === total - 1 && !_isMobile && {
+            y: isInView ? [0, -10, 0] : 0
+          })
+        }}
+        transition={{
+          duration: 0.5,
+          ...(index === total - 1 && !_isMobile && {
+            y: {
+              duration: 1.5,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }
+          })
+        }}
       >
         <div className="pointer-events-auto">
         <div className="flex items-center gap-3 text-white relative z-20">

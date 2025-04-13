@@ -30,10 +30,11 @@ export const cardsData: TimelineCard[] = [
     iconId: "code",
     title: "Tech Stack & Focus",
     content: (
-      <div className="space-y-4">
+      <div className="space-y-6">
         <p><strong>Frontend:</strong> React, Next.js, TypeScript</p>
         <p><strong>Backend:</strong> Node.js, Express, Nest.js, Deno, Bun</p>
         <p><strong>Mobile & Desktop:</strong> React Native + Expo, Lynx, Electron, Tauri</p>
+        <p><strong>UI Libraries:</strong> Shadcn, NativeWind, TailwindCSS, StyleX</p>
         <p><strong>Tools:</strong> Zustand, Redux, SQLite, Git, SCSS</p>
         <p><strong>Currently Learning:</strong> Next.js, Nest.js, Electron, Lynx</p>
       </div>

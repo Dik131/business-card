@@ -30,6 +30,7 @@ export default function TimelineLine({ x1, x2, y, height, opacity, index }: Time
           y2="100%"
           stroke="white"
           strokeWidth="2"
+          className="md:h-full h-[60%] mx-auto"
         />
       </svg>
     </motion.div>
