@@ -45,7 +45,7 @@ export default function TimelineCard({
   }
 
   return (
-    <div ref={cardRef} className={`relative w-full max-w-2xl ${index === 0 ? 'mt-0' : 'mt-[20vh] md:mt-[30vh]'} ${index === total - 1 ? 'mb-[5vh] md:mb-[15vh]' : 'mb-[20vh] md:mb-[30vh]'} ${getPositionStyles()}`}>
+    <div ref={cardRef} className={`relative w-full ${index === 1 ? 'max-w-4xl' : 'max-w-2xl'} ${index === 0 ? 'mt-0' : 'mt-[20vh] md:mt-[30vh]'} ${index === total - 1 ? 'mb-[5vh] md:mb-[15vh]' : 'mb-[20vh] md:mb-[30vh]'} ${getPositionStyles()}`}>
       <motion.div
         className="relative z-10 overflow-hidden rounded-xl bg-[#2A2A2A] p-8 shadow-lg backdrop-blur-sm pointer-events-none"
         style={{ opacity, scale }}

@@ -36,6 +36,8 @@ export const cardsData: TimelineCard[] = [
         <p><strong>Mobile & Desktop:</strong> React Native + Expo, Lynx, Electron, Tauri</p>
         <p><strong>UI Libraries:</strong> Shadcn, NativeWind, TailwindCSS, StyleX</p>
         <p><strong>Tools:</strong> Zustand, Redux, SQLite, Git, SCSS</p>
+        <p><strong>Docs:</strong> Docsify, Docusaurus, Fumadocus</p>
+        <p><strong>Workspace & Management:</strong> Jira, Obsidian, Bitrix24, MS Office</p>
         <p><strong>Currently Learning:</strong> Next.js, Nest.js, Electron, Lynx</p>
       </div>
     ),
