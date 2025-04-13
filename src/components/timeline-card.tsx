@@ -1,6 +1,6 @@
 "use client"
 
-import { type ReactNode, useRef } from "react"
+import { type ReactNode, useRef, JSX } from "react"
 import { motion, useInView, type MotionValue, useTransform } from "framer-motion"
 
 interface TimelineCardProps {
@@ -8,7 +8,7 @@ interface TimelineCardProps {
   position: "left" | "right" | "center"
   icon: ReactNode
   title: string
-  content: string
+  content: string | JSX.Element
   scrollYProgress: MotionValue<number>
   total: number
   isMobile: boolean

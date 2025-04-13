@@ -9,11 +9,14 @@ import {
   Linkedin,
   Mail,
   Terminal,
-  Zap
+  Zap,
+  UserCircle2
 } from "lucide-react"
 import Image from "next/image"
 
-export function getTimelineIcon(iconId: string) {
+import { type ReactNode } from 'react'
+
+export function getTimelineIcon(iconId: string): ReactNode {
   const baseIconClass = "h-5 w-5"
 
   switch (iconId) {
@@ -47,6 +50,8 @@ export function getTimelineIcon(iconId: string) {
       return <Github className={baseIconClass} />
     case "globe":
       return <Globe className={baseIconClass} />
+    case "face":
+      return <UserCircle2 className={baseIconClass} />
     default:
       return <Zap className={baseIconClass} />
   }

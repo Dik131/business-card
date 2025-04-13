@@ -7,6 +7,6 @@ export interface TimelineCard {
     position: CardPosition
     iconId: string
     title: string
-    content: string
+    content: string | JSX.Element
 }
 
