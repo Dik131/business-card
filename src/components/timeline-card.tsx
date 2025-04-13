@@ -30,8 +30,8 @@ export default function TimelineCard({
   const start = index / total
   const end = (index + 1) / total
 
-  const opacity = useTransform(scrollYProgress, [start - 0.1, start, end, end + 0.1], [0, 1, 1, 0])
-  const scale = useTransform(scrollYProgress, [start - 0.1, start, end, end + 0.1], [0.5, 1, 1, 0.5])
+  const opacity = useTransform(scrollYProgress, [start - 0.05, start, end, end + 0.05], [0, 1, 1, 0])
+  const scale = useTransform(scrollYProgress, [start - 0.05, start, end, end + 0.05], [0.8, 1, 1, 0.8])
 
   const getPositionStyles = (): string => {
     switch (position) {
@@ -45,19 +45,19 @@ export default function TimelineCard({
   }
 
   return (
-    <div ref={cardRef} className={`relative my-24 w-full max-w-md ${getPositionStyles()}`}>
+    <div ref={cardRef} className={`relative w-full max-w-2xl ${index === 0 ? 'mt-0' : 'mt-[30vh]'} mb-[30vh] ${getPositionStyles()}`}>
       <motion.div
-        className="relative z-0 overflow-hidden rounded-xl bg-[#2A2A2A] p-6 shadow-lg"
+        className="relative z-0 overflow-hidden rounded-xl bg-[#2A2A2A] p-8 shadow-lg backdrop-blur-sm"
         style={{ opacity, scale }}
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: isInView ? 1 : 0, scale: isInView ? 1 : 0.5 }}
         transition={{ duration: 0.5 }}
       >
         <div className="flex items-center gap-3 text-white">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#FF3B30]">{icon}</div>
-          <h3 className="text-xl font-bold">{title}</h3>
+          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#FF3B30]">{icon}</div>
+          <h3 className="text-3xl font-bold">{title}</h3>
         </div>
-        <p className="mt-4 text-silver">{content}</p>
+        <p className="mt-6 text-xl leading-relaxed text-silver">{content}</p>
       </motion.div>
     </div>
   )

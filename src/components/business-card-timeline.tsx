@@ -31,7 +31,7 @@ export default function BusinessCardTimeline() {
 
       <div
         ref={containerRef}
-        className="relative z-10 mx-auto flex min-h-[200vh] w-full max-w-7xl flex-col items-center py-32"
+        className="relative z-10 mx-auto flex min-h-[200vh] w-full max-w-7xl flex-col items-center pt-16 pb-[30vh]"
       >
         {/* Отображаем точки (dots) */}
         <div className="absolute left-0 top-0 h-full w-full">
