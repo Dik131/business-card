@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { motion, useScroll, useTransform, type MotionValue } from "framer-motion"
 import { Book, Briefcase, Code, Github, Globe, Linkedin, Mail, Terminal, Zap } from "lucide-react"
 import Image from "next/image"
@@ -42,13 +42,8 @@ export default function BusinessCardTimeline() {
     };
   }, []);
 
-  // Initialize arrays with proper types
-  const dotOpacities: MotionValue<number>[] = [];
-  const lineOpacities: MotionValue<number>[] = [];
-
-  // Populate arrays with transformations
-  for (let i = 0; i < CARD_COUNT; i++) {
-    dotOpacities.push(
+  const dotOpacities = useMemo(() => {
+    return Array.from({ length: CARD_COUNT }, (_, i) =>
       useTransform(
         scrollYProgress,
         [
@@ -60,15 +55,17 @@ export default function BusinessCardTimeline() {
         [0, 1, 1, 0]
       )
     );
+  }, [scrollYProgress]);
 
-    lineOpacities.push(
+  const lineOpacities = useMemo(() => {
+    return Array.from({ length: CARD_COUNT }, (_, i) =>
       useTransform(
         scrollYProgress,
         [i / CARD_COUNT, (i + 1) / CARD_COUNT],
         [0, 1]
       )
     );
-  }
+  }, [scrollYProgress]);
 
   const cards: TimelineCard[] = [
     {
