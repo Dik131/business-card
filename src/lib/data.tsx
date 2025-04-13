@@ -17,7 +17,8 @@ export const cardsData: TimelineCard[] = [
           />
         </div>
         <div>
-          <p className="text-3xl font-bold mb-2">Developer & Tech Support</p>
+          <p className="text-3xl font-bold mb-2">React/React Native Developer</p> 
+          <p className="text-3xl font-bold mb-2">& Tech Support</p>
           <p className="text-xl text-gray-300">Moscow, Russia</p>
         </div>
       </div>
@@ -48,13 +49,13 @@ export const cardsData: TimelineCard[] = [
         <div className="project-card p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all">
           <h3 className="text-lg font-semibold mb-2">Course App</h3>
           <p className="text-sm text-gray-300 mb-3">A mobile application for learning and education</p>
-          <div className="flex gap-3">
+          <div className="flex gap-3 relative z-20">
             <a href="https://drive.google.com/file/d/1qINTBb7q1WqKikYpudwz7-wWV5pYDfyw/view?usp=drivesdk" 
-               className="px-3 py-1 bg-[#FF3B30] text-white rounded-full text-sm hover:bg-[#E6352B] transition-colors" 
+               className="inline-block px-3 py-1 bg-[#FF3B30] text-white rounded-full text-sm hover:bg-[#E6352B] transition-colors cursor-pointer relative z-20 pointer-events-auto" 
                target="_blank" 
                rel="noopener noreferrer">Download APK</a>
             <a href="https://github.com/Dik131/course-app" 
-               className="px-3 py-1 border border-[#FF3B30] text-[#FF3B30] rounded-full text-sm hover:bg-[#FF3B30] hover:text-white transition-colors" 
+               className="inline-block px-3 py-1 border border-[#FF3B30] text-[#FF3B30] rounded-full text-sm hover:bg-[#FF3B30] hover:text-white transition-colors cursor-pointer relative z-20 pointer-events-auto" 
                target="_blank" 
                rel="noopener noreferrer">View Code</a>
           </div>
@@ -63,13 +64,13 @@ export const cardsData: TimelineCard[] = [
         <div className="project-card p-4 bg-white/5 rounded-lg hover:bg-white/10 transition-all">
           <h3 className="text-lg font-semibold mb-2">Weeky</h3>
           <p className="text-sm text-gray-300 mb-3">Task manager with IndexedDB for offline data persistence</p>
-          <div className="flex gap-3">
+          <div className="flex gap-3 relative z-20">
             <a href="https://weeky.netlify.app/" 
-               className="px-3 py-1 bg-[#FF3B30] text-white rounded-full text-sm hover:bg-[#E6352B] transition-colors" 
+               className="inline-block px-3 py-1 bg-[#FF3B30] text-white rounded-full text-sm hover:bg-[#E6352B] transition-colors cursor-pointer relative z-20 pointer-events-auto" 
                target="_blank" 
                rel="noopener noreferrer">Live Demo</a>
             <a href="https://github.com/Dik131/weeky" 
-               className="px-3 py-1 border border-[#FF3B30] text-[#FF3B30] rounded-full text-sm hover:bg-[#FF3B30] hover:text-white transition-colors" 
+               className="inline-block px-3 py-1 border border-[#FF3B30] text-[#FF3B30] rounded-full text-sm hover:bg-[#FF3B30] hover:text-white transition-colors cursor-pointer relative z-20 pointer-events-auto" 
                target="_blank" 
                rel="noopener noreferrer">View Code</a>
           </div>
