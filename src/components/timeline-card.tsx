@@ -57,7 +57,7 @@ export default function TimelineCard({
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[#FF3B30]">{icon}</div>
           <h3 className="text-3xl font-bold">{title}</h3>
         </div>
-        <p className="mt-6 text-xl leading-relaxed text-silver">{content}</p>
+        <div className="mt-6 text-xl leading-relaxed text-silver">{content}</div>
       </motion.div>
     </div>
   )
