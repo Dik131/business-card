@@ -108,6 +108,9 @@ export const cardsData: TimelineCard[] = [
         <p>
           <a href="https://bsky.app/profile/ivanovdk.bsky.social" className="text-[#FF3B30] hover:underline" target="_blank" rel="noopener noreferrer">BlueSky: ivanovdk.bsky.social</a>
         </p>
+        <p>
+          <a href="https://stepik.org/users/37791605" className="text-[#FF3B30] hover:underline" target="_blank" rel="noopener noreferrer">My profile on Stepik.org</a>
+        </p>
       </div>
     ),
   }
