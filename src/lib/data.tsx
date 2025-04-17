@@ -103,13 +103,11 @@ export const cardsData: TimelineCard[] = [
         <p>
           <a href="https://www.linkedin.com/in/dmitry-ivanov-47bb4921a/" className="text-[#FF3B30] hover:underline" target="_blank" rel="noopener noreferrer">LinkedIn</a>{" | "}
           <a href="https://github.com/Dik131" className="text-[#FF3B30] hover:underline" target="_blank" rel="noopener noreferrer">GitHub</a>{" | "}
-          <a href="https://t.me/Dik131" className="text-[#FF3B30] hover:underline" target="_blank" rel="noopener noreferrer">Telegram</a>
+          <a href="https://t.me/Dik131" className="text-[#FF3B30] hover:underline" target="_blank" rel="noopener noreferrer">Telegram</a>{" | "}
+          <a href="https://stepik.org/users/37791605" className="text-[#FF3B30] hover:underline" target="_blank" rel="noopener noreferrer">Stepik.org</a>
         </p>
         <p>
           <a href="https://bsky.app/profile/ivanovdk.bsky.social" className="text-[#FF3B30] hover:underline" target="_blank" rel="noopener noreferrer">BlueSky: ivanovdk.bsky.social</a>
-        </p>
-        <p>
-          <a href="https://stepik.org/users/37791605" className="text-[#FF3B30] hover:underline" target="_blank" rel="noopener noreferrer">My profile on Stepik.org</a>
         </p>
       </div>
     ),
